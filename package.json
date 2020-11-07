@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild src/entry.ts --bundle --minify --sourcemap --outfile=public/bundle.js",
+    "build:app": "esbuild src/entry.ts --bundle --minify --sourcemap --outfile=public/bundle.js",
+    "build:workers": "esbuild src/workers/processImage/processImage.worker.ts --bundle --outfile=public/processImage.worker.js",
+    "build": "npm run build:app & npm run build:workers",
     "watch": "chokidar \"src/**/*\" -d 10 --initial -c \"npm run build\"",
     "serve": "cd public & live-server",
     "start": "concurrently \"npm run watch\" \"npm run serve\"",
@@ -22,6 +24,9 @@
     "typescript": "^4.0.5"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^2.7.0",
+    "@tensorflow/tfjs-backend-wasm": "^2.7.0",
+    "mathjs": "^8.0.0",
     "preact": "^10.5.5"
   }
 }

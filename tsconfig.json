@@ -4,6 +4,6 @@
     "jsx": "react",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
-    "lib": ["ES2017"]
+    "lib": ["ES2017", "WebWorker", "ES5"]
   }
 }

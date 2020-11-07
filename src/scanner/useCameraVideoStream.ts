@@ -36,6 +36,7 @@ export default function useCameraVideoStream() {
       doAsync();
     }
   }, [videoRef]);
+
   return {
     ref: videoRef,
     stream: streamRef.current,
@@ -45,5 +46,6 @@ export default function useCameraVideoStream() {
       ref: videoRef,
       ...dimensions,
     },
+    stop: () => setIsPlaying(false),
   };
 }
