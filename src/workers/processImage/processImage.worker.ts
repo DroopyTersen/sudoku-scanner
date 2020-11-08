@@ -13,7 +13,7 @@ const PROCESSING_SIZE = 900;
 
 onmessage = async function (e) {
   let { imageData, width, height } = e.data;
-  let image = getImage(imageData, width, height);
+  let image = getGreyscaleImage(imageData, width, height);
   let corners = null;
   let gridLines = null;
   let boxes = null;
@@ -47,10 +47,19 @@ onmessage = async function (e) {
       boxes = extractBoxes(extractedImageGreyScale, extractedImageThresholded);
     }
   }
-  self.postMessage({ width, height, corners, gridLines, boxes });
+  self.postMessage({
+    width,
+    height,
+    corners,
+    gridLines,
+    boxes,
+    original: imageData,
+    greyscale: image.toImageData(),
+    thresholded: thresholded.toImageData(),
+  });
 };
 
-const getImage = (imageData, width, height) => {
+const getGreyscaleImage = (imageData, width, height) => {
   // convert to greyscale
   const bytes = new Uint8ClampedArray(width * height);
   for (let y = 0; y < height; y++) {

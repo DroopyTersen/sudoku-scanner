@@ -15,8 +15,20 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
+  width: 100vw;
   background: rgba(255, 255, 255, 0.5);
   font-size: 10vw;
   display: grid;
   place-items: center;
+  z-index: 99;
+  cursor: pointer;
+}
+
+.preview-canvas {
+  background-color: transparent;
+  width: 100vw;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 9;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useCallback, useEffect, useRef, useState } from "preact/hooks";
 
 const getStream = () => {
   return navigator.mediaDevices.getUserMedia({
@@ -37,6 +37,10 @@ export default function useCameraVideoStream() {
     }
   }, [videoRef]);
 
+  const stop = useCallback(() => {
+    setIsPlaying(false);
+  }, [setIsPlaying]);
+
   return {
     ref: videoRef,
     stream: streamRef.current,
@@ -46,6 +50,6 @@ export default function useCameraVideoStream() {
       ref: videoRef,
       ...dimensions,
     },
-    stop: () => setIsPlaying(false),
+    stop,
   };
 }
